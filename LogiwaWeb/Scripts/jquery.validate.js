@@ -48,10 +48,10 @@ $.extend( $.fn, {
 				debugger
 				var stock = $('#ProductQuantity').val();
 				var minStockText = $('#CategoryId :selected').text();
-				var minStock = minStockText.replace(/[^0-9]/g, '');
+				var minStock = minStockText.replace(/[^0-9]/g, ''); 
 				var active = $('#Active').val();
 
-				if ((stock < minStock) && (active == "1")) {
+				if ((parseInt(stock) < parseInt(minStock)) && (active == "1")) {
 					alertify.alert("The stock quantity of of an active product must be equal or greater then the category's minimum quantity value")
 					return false;
 
