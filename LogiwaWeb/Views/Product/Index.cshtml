@@ -1,0 +1,88 @@
+﻿@model IEnumerable<LogiwaWeb.Models.ProductModel>
+
+@{
+    ViewBag.Title = "";
+
+}
+
+<br />
+
+<br />
+
+<p>
+    <a href="@Url.Action("AddOrEdit","Product")" class="btn btn-default"><i class="fa fa-plus"></i>Create New Product</a>
+</p>
+
+<br />
+
+<table class="table table-striped">
+    <thead class="table-heading">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ProductTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductDesc)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ProductQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductDesc)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActiveString)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                <a href="@Url.Action("AddOrEdit","Product",new {id = item.ProductId })" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</a>
+                <a onclick="Delete(@item.ProductId)" class="btn btn-default"><i class="fa fa-trash"></i> Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts
+    {
+    <script>
+    $(function () {
+        var successMessage = '@TempData["SuccessMessage"]'
+        if (successMessage != '')
+            alertify.success(successMessage);
+    });
+
+        function Delete(id) {
+            alertify.confirm('Logiwa Management System', 'Are you sure to delete ?', function () { window.location.href = '@Url.Action("Delete","Product")/' + id }, null);
+        }
+        
+    </script>
+
+}   

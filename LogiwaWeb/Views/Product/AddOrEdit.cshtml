@@ -1,0 +1,75 @@
+﻿@model LogiwaWeb.Models.ProductModel
+@{
+    ViewBag.Title = "AddOrEdit";
+}
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    if (Model.Categories != null)
+    {
+        foreach (var model in Model.Categories)
+        {
+            SelectListItem item = new SelectListItem();
+            item.Text = model.CategoryTitle + " - " + "Min Stock Quantity : " +  model.CategoryQuantity.ToString();
+            item.Value = model.CategoryId.ToString();
+            listItems.Add(item);
+        }
+    }
+
+}
+
+<div class="form-body">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(m => m.ProductId)
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.CategoryId)
+        </div>
+        @Html.DropDownListFor(model => model.CategoryId, listItems, "-- Select Category --")
+
+        <br />
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ProductTitle)
+            @Html.EditorFor(m => m.ProductTitle)
+            @Html.ValidationMessageFor(m => m.ProductTitle)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ProductDesc)
+            @Html.EditorFor(m => m.ProductDesc)
+            @Html.ValidationMessageFor(m => m.ProductDesc)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ProductQuantity)
+            @Html.EditorFor(m => m.ProductQuantity)
+            @Html.ValidationMessageFor(m => m.ProductQuantity)
+        </div>
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Active)
+        </div>
+        @Html.DropDownListFor(model => model.Active, new SelectListItem[]{
+
+                new SelectListItem() {Text = "No", Value="0" },
+                new SelectListItem() {Text = "Yes", Value="1"}})
+
+        <br />
+        <br />
+
+
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn button" />
+            <input type="reset" value="Clear" class="btn button" />
+        </div>
+
+    }
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+}

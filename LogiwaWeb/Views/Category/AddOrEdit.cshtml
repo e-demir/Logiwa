@@ -1,0 +1,36 @@
+﻿@model LogiwaWeb.Models.CategoryModel
+
+@{
+    ViewBag.Title = "AddOrEdit";
+}
+
+<div class="form-body">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(m => m.CategoryId)
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.CategoryTitle)
+            @Html.EditorFor(m => m.CategoryTitle)
+            @Html.ValidationMessageFor(m => m.CategoryTitle)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.CategoryQuantity)
+            @Html.EditorFor(m => m.CategoryQuantity)
+            @Html.ValidationMessageFor(m => m.CategoryQuantity)
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn button" />
+            <input type="reset" value="Clear" class="btn button" />
+        </div>
+
+    }
+
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+}

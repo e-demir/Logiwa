@@ -1,0 +1,74 @@
+﻿@model IEnumerable<LogiwaWeb.Models.CategoryModel>
+
+
+@{
+    ViewBag.Title = "";
+}
+
+<br />
+
+<br />
+
+<p>
+    <a href="@Url.Action("AddOrEdit","Category")" class="btn btn-default"><i class="fa fa-plus"></i>Create New Category</a>
+</p>
+
+<br />
+
+<table class="table table-striped">
+    <thead class="table-heading">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryQuantity)
+            </th>
+
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryTitle)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryQuantity)
+            </td>
+
+            <td>
+                <a href="@Url.Action("AddOrEdit","Category",new {id = item.CategoryId })" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</a>
+                <a onclick="Delete(@item.CategoryId)" class="btn btn-default"><i class="fa fa-trash"></i> Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts
+    {
+    <script>
+    $(function () {
+        var successMessage = '@TempData["SuccessMessage"]'
+        if (successMessage != '')
+            alertify.success(successMessage);
+    });
+
+        function Delete(id) {
+            alertify.confirm('Logiwa Management System', 'Are you sure to delete ?', function () { window.location.href = '@Url.Action("Delete","Category")/' + id }, null);
+        }
+    </script>
+
+}
+
