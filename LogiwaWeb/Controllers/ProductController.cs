@@ -10,12 +10,33 @@ namespace LogiwaWeb.Controllers
 {
     public class ProductController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string searching)
         {
             List<ProductModel> prodcutList;
             HttpResponseMessage response = GlobalVariables.WebApiClient.GetAsync("product/GetAllProducts").Result;
             prodcutList = response.Content.ReadAsAsync<List<ProductModel>>().Result;
-            return View(prodcutList);
+
+            if (!string.IsNullOrEmpty(searching))
+            {
+                var titleItems = prodcutList.FindAll(x => x.ProductTitle.Contains(searching));
+                var descItems = prodcutList.FindAll(x => x.ProductDesc.Contains(searching));
+                var categoryItems = prodcutList.FindAll(x => x.CategoryName.Contains(searching));
+
+                List<ProductModel> products = new List<ProductModel>();
+                products.AddRange(titleItems);
+                products.AddRange(descItems);
+                products.AddRange(categoryItems);
+
+                //return View(prodcutList.Where( x => x.ProductTitle.StartsWith(searching) || searching == null).ToList());
+                return View(products.ToList());
+
+            }
+            else
+            {
+                return View(prodcutList);
+            }
+
+
         }
 
         public ActionResult AddOrEdit(int id = 0)

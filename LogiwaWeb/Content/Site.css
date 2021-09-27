@@ -31,7 +31,7 @@ input[type="checkbox"].input-validation-error {
     border: 0 none;
 }
 
-.validation-summary-errors {
+.validation-mmary-errors {
     color: #b94a48;
 }
 
@@ -50,6 +50,18 @@ input, textarea {
     border-radius: 0;
     transition: border-color .25s ease,box-shadow .25s ease;
 }
+
+
+
+input:not([type]), input[type="text"] {
+    color : black;
+}
+
+.searchSubmit {
+    color:black;
+    margin-top: 10px;
+}
+
 
 select {
     display: block;

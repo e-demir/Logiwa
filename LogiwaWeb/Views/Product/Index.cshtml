@@ -9,8 +9,18 @@
 
 <br />
 
+@using (Html.BeginForm("Index", "Product", FormMethod.Get))
+{
+    @Html.TextBox("searching", "", new { placeholder = "Type a keyword" })
+    <input type="submit" value="Search" class="searchSubmit" />
+}
+
+<br />
+
+<a href="@Url.Action("AddOrEdit", "Product")" class="btn btn-default"><i class="fa fa-plus"></i>Create New Product</a>
+
 <p>
-    <a href="@Url.Action("AddOrEdit","Product")" class="btn btn-default"><i class="fa fa-plus"></i>Create New Product</a>
+
 </p>
 
 <br />
@@ -40,33 +50,46 @@
         </tr>
     </thead>
 
-    @foreach (var item in Model)
+    @if (Model.Count() == 0)
     {
         <tr>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductDesc)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductQuantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ActiveString)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryName)
-            </td>
-            <td>
-                <a href="@Url.Action("AddOrEdit","Product",new {id = item.ProductId })" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</a>
-                <a onclick="Delete(@item.ProductId)" class="btn btn-default"><i class="fa fa-trash"></i> Delete</a>
+            <td colspan="3" style="color=red">
+                No match any product
             </td>
         </tr>
     }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductDesc)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActiveString)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    <a href="@Url.Action("AddOrEdit","Product",new {id = item.ProductId })" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</a>
+                    <a onclick="Delete(@item.ProductId)" class="btn btn-default"><i class="fa fa-trash"></i> Delete</a>
+                </td>
+            </tr>
+        }
+    }
+
+
 
 </table>
 
@@ -82,7 +105,7 @@
         function Delete(id) {
             alertify.confirm('Logiwa Management System', 'Are you sure to delete ?', function () { window.location.href = '@Url.Action("Delete","Product")/' + id }, null);
         }
-        
+
     </script>
 
 }   
