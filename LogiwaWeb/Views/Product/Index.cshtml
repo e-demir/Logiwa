@@ -11,7 +11,7 @@
 
 @using (Html.BeginForm("Index", "Product", FormMethod.Get))
 {
-    @Html.TextBox("searching", "", new { placeholder = "Type a keyword" })
+    @Html.TextBox("searching", "", new { @class = "searchSubmit"})
     <input type="submit" value="Search" class="searchSubmit" />
 }
 

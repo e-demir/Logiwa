@@ -52,7 +52,7 @@ $.extend( $.fn, {
 				var active = $('#Active').val();
 
 				if ((parseInt(stock) < parseInt(minStock)) && (active == "1")) {
-					alertify.alert("The stock quantity of of an active product must be equal or greater then the category's minimum quantity value")
+					alertify.alert("Logiwa Management System","The stock quantity of of an active product must be equal or greater then the category's minimum quantity value")
 					return false;
 
 

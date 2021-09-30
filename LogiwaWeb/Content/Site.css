@@ -53,10 +53,10 @@ input, textarea {
 
 
 
-input:not([type]), input[type="text"] {
+/*input:not([type]), input[type="text"] {
     color : black;
 }
-
+*/
 .searchSubmit {
     color:black;
     margin-top: 10px;

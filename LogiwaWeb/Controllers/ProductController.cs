@@ -27,8 +27,9 @@ namespace LogiwaWeb.Controllers
                 products.AddRange(descItems);
                 products.AddRange(categoryItems);
 
+
                 //return View(prodcutList.Where( x => x.ProductTitle.StartsWith(searching) || searching == null).ToList());
-                return View(products.ToList());
+                return View(products.GroupBy(x => x.ProductId).Select(x => x.First()).ToList());
 
             }
             else
